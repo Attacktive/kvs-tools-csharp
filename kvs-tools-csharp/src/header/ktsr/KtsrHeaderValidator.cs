@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using kvs_tools_csharp.extension;
-using kvs_tools_csharp.util.header;
 
-namespace kvs_tools_csharp.header
+namespace kvs_tools_csharp.header.ktsr
 {
 	public static class KtsrHeaderValidator
 	{

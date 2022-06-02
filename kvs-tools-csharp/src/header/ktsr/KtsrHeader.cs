@@ -2,7 +2,7 @@
 using System.Linq;
 using kvs_tools_csharp.extension;
 
-namespace kvs_tools_csharp.util.header
+namespace kvs_tools_csharp.header.ktsr
 {
 	public class KtsrHeader
 	{

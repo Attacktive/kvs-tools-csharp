@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using kvs_tools_csharp.util.header;
 
-namespace kvs_tools_csharp.header
+namespace kvs_tools_csharp.header.ktsr
 {
 	public static class KtsrHeaderReader
 	{

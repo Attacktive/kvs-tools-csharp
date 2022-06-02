@@ -4,9 +4,9 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using kvs_tools_csharp.extension;
-using kvs_tools_csharp.util.header;
+using kvs_tools_csharp.header.ktsr;
 
-namespace kvs_tools_csharp.header
+namespace kvs_tools_csharp.header.source
 {
 	public static class SourceHeaderReader
 	{
