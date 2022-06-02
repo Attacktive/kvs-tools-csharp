@@ -11,13 +11,16 @@ namespace kvs_tools_csharp.util
 				throw new ArgumentException();
 			}
 
+			var commandArgument = arguments[0];
+			var pathArgument = arguments[1];
+
 			Command command;
 			string? pathToFile;
-			switch (arguments[0].ToLower())
+			switch (commandArgument.ToLower())
 			{
 				case "extract":
 					command = Command.Extract;
-					pathToFile = arguments[1];
+					pathToFile = pathArgument;
 					break;
 				case "archive":
 					command = Command.Archive;
@@ -32,7 +35,12 @@ namespace kvs_tools_csharp.util
 
 			if (command == Command.None)
 			{
-				throw new ArgumentException();
+				throw new ArgumentException($"The 1st argument ({commandArgument}) must be either \"extract\" or \"archive\".");
+			}
+
+			if (pathToFile == null)
+			{
+				throw new ArgumentException($"The 2nd argument ({pathArgument}) is invalid.");
 			}
 
 			return (command, pathToFile);
