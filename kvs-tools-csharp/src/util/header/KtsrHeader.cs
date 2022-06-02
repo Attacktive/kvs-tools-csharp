@@ -6,8 +6,8 @@ namespace kvs_tools_csharp.util.header
 {
 	public class KtsrHeader
 	{
-		public const string DefaultSignature = "KTSR";
-		public const int NumberOfBytes = 96;
+		public static readonly int NumberOfBytes = 96;
+		public static readonly string DefaultSignature = "KTSR";
 		public static readonly byte[] DefaultChunkType = { 0x02, 0x94, 0xdd, 0xfc };
 
 		public string Signature { get; }
