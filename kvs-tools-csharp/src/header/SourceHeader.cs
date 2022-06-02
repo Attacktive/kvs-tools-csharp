@@ -22,9 +22,7 @@ namespace kvs_tools_csharp.header
 
 		public override string ToString()
 		{
-			return $@"FileSize: {FileSize}
-Signature: {Signature.Value}
-UnknownBytes: {UnknownBytes.ToHexString()}";
+			return $"FileSize: {FileSize}, Signature: {Signature.Value}, UnknownBytes: {UnknownBytes.ToHexString()}";
 		}
 
 		public byte[] ToBytes() => BitConverter.GetBytes(FileSize)
