@@ -5,7 +5,7 @@ using kvs_tools_csharp.util;
 
 namespace kvs_tools_csharp.header
 {
-	public partial class SourceHeader
+	public class SourceHeader
 	{
 		public static readonly int NumberOfBytes = 32;
 
