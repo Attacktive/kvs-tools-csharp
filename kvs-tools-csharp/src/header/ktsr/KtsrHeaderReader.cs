@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace kvs_tools_csharp.util.header
+namespace kvs_tools_csharp.header.ktsr
 {
 	public static class KtsrHeaderReader
 	{
@@ -11,9 +12,9 @@ namespace kvs_tools_csharp.util.header
 		{
 			Console.WriteLine($"Trying to open {pathToFile}");
 
-			using var source = File.OpenRead(pathToFile);
+			using var fileStream = File.OpenRead(pathToFile);
 			var buffer = new byte[KtsrHeader.NumberOfBytes];
-			var bytesRead = source.Read(buffer, 0, KtsrHeader.NumberOfBytes);
+			var bytesRead = fileStream.Read(buffer, 0, KtsrHeader.NumberOfBytes);
 			if (bytesRead != KtsrHeader.NumberOfBytes)
 			{
 				throw new KtsrHeaderValidator.InvalidKtsrHeaderException(KtsrHeader.NumberOfBytes, bytesRead);
@@ -25,7 +26,7 @@ namespace kvs_tools_csharp.util.header
 			return ktsrHeader;
 		}
 
-		private static KtsrHeader ParseKtsrHeader(byte[] bytes, bool toValidate = true)
+		private static KtsrHeader ParseKtsrHeader(IReadOnlyList<byte> bytes, bool toValidate = true)
 		{
 			var signatureBytes = bytes.Take(4).ToArray();
 			var chunkTypeBytes = bytes.Skip(4).Take(4).ToArray();

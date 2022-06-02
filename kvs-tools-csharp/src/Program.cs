@@ -1,6 +1,8 @@
 ﻿using System;
+using kvs_tools_csharp.header;
+using kvs_tools_csharp.header.ktsr;
+using kvs_tools_csharp.header.source;
 using kvs_tools_csharp.util;
-using kvs_tools_csharp.util.header;
 
 namespace kvs_tools_csharp
 {
@@ -20,7 +22,8 @@ archive ./directory/to/source/files"
 
 					return 1;
 				case Command.Extract:
-					KtsrHeaderReader.ReadHeader(pathToFile!);
+					var ktsrHeader = KtsrHeaderReader.ReadHeader(pathToFile!);
+					var sourceFiles = SourceHeaderReader.ReadHeader(pathToFile!);
 					break;
 				case Command.Archive:
 				default:
