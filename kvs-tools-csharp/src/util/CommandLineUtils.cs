@@ -16,7 +16,7 @@ namespace kvs_tools_csharp.util
 
 			Command command;
 			string? pathToFile;
-			switch (commandArgument.ToLower())
+			switch (commandArgument.ToLowerInvariant())
 			{
 				case "extract":
 					command = Command.Extract;
