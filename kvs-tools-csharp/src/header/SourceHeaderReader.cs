@@ -29,7 +29,15 @@ namespace kvs_tools_csharp.header
 
 				binaryReader.BaseStream.Seek(0, SeekOrigin.Current);
 				var contentBuffer = new byte[sourceHeader.FileSize];
-				index += binaryReader.Read(contentBuffer, 0, checked((int)sourceHeader.FileSize));
+				var bytesRead = binaryReader.Read(contentBuffer, 0, checked((int)sourceHeader.FileSize));
+				if (bytesRead == 0)
+				{
+					break;
+				}
+
+				index += bytesRead;
+
+				Console.WriteLine($"Source File #{sourceFiles.Count + 1}: {sourceHeader}");
 
 				sourceFiles.Add(contentBuffer);
 			} while (index <= fileStream.Length);
@@ -39,9 +47,9 @@ namespace kvs_tools_csharp.header
 
 		private static SourceHeader ParseSourceHeader(byte[] bytes)
 		{
-			var signatureBytes = bytes.Take(4).ToArray();
-			var fileSizeBytes = bytes.Skip(4).Take(4).ToArray();
-			var unknownBytes = bytes.Skip(8).Take(4).ToArray();
+			var fileSizeBytes = bytes.Take(4).ToArray();
+			var signatureBytes = bytes.Skip(16).Take(4).ToArray();
+			var unknownBytes = bytes.Skip(20).Take(4).ToArray();
 
 			var sourceSignature = SourceSignature.BySignatureBytes(signatureBytes);
 			if (sourceSignature == null)
@@ -50,14 +58,14 @@ namespace kvs_tools_csharp.header
 			}
 
 			var fileSize = BitConverter.ToUInt32(fileSizeBytes);
-			fileSize += 32;
+			fileSize += 13;
 
-			return new SourceHeader(sourceSignature, fileSize, unknownBytes);
+			return new SourceHeader(fileSize, sourceSignature, unknownBytes);
 		}
 
 		private class InvalidSignatureException : DataException
 		{
-			internal InvalidSignatureException(byte[] signature, Exception? cause = null) : base($"Unexpected file signature: {signature.ToHexString()}", cause) { }
+			internal InvalidSignatureException(IEnumerable<byte> signature, Exception? cause = null) : base($"Unexpected file signature: {signature.ToHexString()}", cause) { }
 		}
 	}
 }
