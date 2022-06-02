@@ -1,5 +1,4 @@
 ﻿using System;
-using kvs_tools_csharp.header;
 using kvs_tools_csharp.header.ktsr;
 using kvs_tools_csharp.header.source;
 using kvs_tools_csharp.util;
