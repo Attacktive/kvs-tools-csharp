@@ -2,8 +2,9 @@
 using System.Data;
 using System.Linq;
 using kvs_tools_csharp.extension;
+using kvs_tools_csharp.util.header;
 
-namespace kvs_tools_csharp.util.header
+namespace kvs_tools_csharp.header
 {
 	public static class KtsrHeaderValidator
 	{
