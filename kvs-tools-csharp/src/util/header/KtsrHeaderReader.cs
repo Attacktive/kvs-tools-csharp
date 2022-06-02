@@ -16,7 +16,7 @@ namespace kvs_tools_csharp.util.header
 			var bytesRead = source.Read(buffer, 0, KtsrHeader.NumberOfBytes);
 			if (bytesRead != KtsrHeader.NumberOfBytes)
 			{
-				throw new Exception($"Expected to read {KtsrHeader.NumberOfBytes} bytes but actually did {bytesRead}.");
+				throw new KtsrHeaderValidator.InvalidKtsrHeaderException(KtsrHeader.NumberOfBytes, bytesRead);
 			}
 
 			var ktsrHeader = ParseKtsrHeader(buffer);

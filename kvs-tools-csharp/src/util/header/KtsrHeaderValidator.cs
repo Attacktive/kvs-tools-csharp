@@ -43,6 +43,11 @@ namespace kvs_tools_csharp.util.header
 			}
 		}
 
+		public class InvalidKtsrHeaderException : DataException
+		{
+			public InvalidKtsrHeaderException(int expectedNumberOfBytes, int bytesRead) : base($"Expected to read {expectedNumberOfBytes} bytes but actually did {bytesRead}.") { }
+		}
+
 		private class InvalidSignatureException : DataException
 		{
 			internal InvalidSignatureException(string signature, Exception? cause = null) : base($"Unexpected file signature: {signature}", cause) { }
