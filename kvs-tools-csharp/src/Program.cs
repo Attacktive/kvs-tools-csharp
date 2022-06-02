@@ -1,5 +1,6 @@
 ﻿using System;
 using kvs_tools_csharp.util;
+using kvs_tools_csharp.util.header;
 
 namespace kvs_tools_csharp
 {
@@ -8,18 +9,24 @@ namespace kvs_tools_csharp
 		private static int Main(params string[] args)
 		{
 			var (command, pathToFile) = CommandLineUtils.Parse(args);
-			if (command == Command.None)
+			switch (command)
 			{
-				Console.WriteLine(
-					@"Usage:
+				case Command.None:
+					Console.WriteLine(
+						@"Usage:
 extract ./bgm.ktsl2stbin
 archive ./directory/to/source/files"
-				);
+					);
 
-				return 1;
+					return 1;
+				case Command.Extract:
+					KtsrHeaderReader.ReadHeader(pathToFile!);
+					break;
+				case Command.Archive:
+				default:
+					// TODO
+					break;
 			}
-
-			// TODO
 
 			return 0;
 		}
