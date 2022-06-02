@@ -26,10 +26,12 @@ namespace KvsTools.header.source
 				index += binaryReader.Read(headerBuffer, 0, SourceHeader.NumberOfBytes);
 
 				var sourceHeader = ParseSourceHeader(headerBuffer);
+				// fixme: Why is it needed?
+				var actualFileSize = checked((int)sourceHeader.FileSize + 13);
 
 				binaryReader.BaseStream.Seek(0, SeekOrigin.Current);
-				var contentBuffer = new byte[sourceHeader.FileSize];
-				var bytesRead = binaryReader.Read(contentBuffer, 0, checked((int)sourceHeader.FileSize));
+				var contentBuffer = new byte[actualFileSize];
+				var bytesRead = binaryReader.Read(contentBuffer, 0, actualFileSize);
 				if (bytesRead == 0)
 				{
 					break;
@@ -49,7 +51,7 @@ namespace KvsTools.header.source
 		{
 			var fileSizeBytes = bytes.Take(4).ToArray();
 			var signatureBytes = bytes.Skip(16).Take(4).ToArray();
-			var unknownBytes = bytes.Skip(20).Take(4).ToArray();
+			var unknownBytes = bytes.Skip(24).Take(8).ToArray();
 
 			var sourceSignature = SourceSignature.BySignatureBytes(signatureBytes);
 			if (sourceSignature == null)
@@ -58,7 +60,6 @@ namespace KvsTools.header.source
 			}
 
 			var fileSize = BitConverter.ToUInt32(fileSizeBytes);
-			fileSize += 13;
 
 			return new SourceHeader(fileSize, sourceSignature, unknownBytes);
 		}

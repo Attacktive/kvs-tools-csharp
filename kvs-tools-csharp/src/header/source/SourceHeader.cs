@@ -26,7 +26,9 @@ namespace KvsTools.header.source
 		}
 
 		public byte[] ToBytes() => BitConverter.GetBytes(FileSize)
+			.Concat(RepetitionUtils.GetBytesOfNulls(12))
 			.Concat(Signature.ToByteArray())
+			.Concat(BitConverter.GetBytes(FileSize - 32))
 			.Concat(UnknownBytes)
 			.Concat(RepetitionUtils.GetBytesOfNulls(16))
 			.ToArray();
