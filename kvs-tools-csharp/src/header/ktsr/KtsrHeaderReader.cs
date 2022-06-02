@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace kvs_tools_csharp.header.ktsr
+namespace KvsTools.header.ktsr
 {
 	public static class KtsrHeaderReader
 	{

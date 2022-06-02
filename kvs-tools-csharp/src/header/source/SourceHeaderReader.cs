@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using kvs_tools_csharp.extension;
-using kvs_tools_csharp.header.ktsr;
+using KvsTools.extension;
+using KvsTools.header.ktsr;
 
-namespace kvs_tools_csharp.header.source
+namespace KvsTools.header.source
 {
 	public static class SourceHeaderReader
 	{

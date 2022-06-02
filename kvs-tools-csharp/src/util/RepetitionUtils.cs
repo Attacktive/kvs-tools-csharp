@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace kvs_tools_csharp.util
+namespace KvsTools.util
 {
 	public static class RepetitionUtils
 	{

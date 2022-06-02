@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using kvs_tools_csharp.extension;
+using KvsTools.extension;
 
-namespace kvs_tools_csharp.header.ktsr
+namespace KvsTools.header.ktsr
 {
 	public static class KtsrHeaderValidator
 	{
