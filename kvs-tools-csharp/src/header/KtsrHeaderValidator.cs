@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using kvs_tools_csharp.extension;
@@ -56,7 +57,7 @@ namespace kvs_tools_csharp.header
 
 		private class InvalidChunkTypeException : DataException
 		{
-			internal InvalidChunkTypeException(byte[] chunkType, Exception? cause = null) : base($"Unexpected chunk type: {chunkType.ToHexString()}", cause) { }
+			internal InvalidChunkTypeException(IEnumerable<byte> chunkType, Exception? cause = null) : base($"Unexpected chunk type: {chunkType.ToHexString()}", cause) { }
 		}
 
 		private class InvalidPlatformException : DataException
@@ -71,7 +72,7 @@ namespace kvs_tools_csharp.header
 
 		private class InvalidGameIdException : DataException
 		{
-			internal InvalidGameIdException(byte[] gameId, Exception? cause = null) : base($"Unexpected game ID: {gameId.ToHexString()}", cause) { }
+			internal InvalidGameIdException(IEnumerable<byte> gameId, Exception? cause = null) : base($"Unexpected game ID: {gameId.ToHexString()}", cause) { }
 		}
 
 		private class InvalidGameEntriesException : DataException

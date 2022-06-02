@@ -23,7 +23,7 @@ namespace kvs_tools_csharp.header
 			Extension = extension;
 		}
 
-		public byte[] ToByteArray() => Encoding.UTF8.GetBytes(Value);
+		public IEnumerable<byte> ToByteArray() => Encoding.UTF8.GetBytes(Value);
 
 		public static SourceSignature? BySignatureBytes(byte[] signatureBytes)
 		{
