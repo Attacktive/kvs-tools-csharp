@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using KvsTools.extension;
+using KvsTools.util;
 
 namespace KvsTools.header.ktsr
 {
@@ -22,6 +25,20 @@ namespace KvsTools.header.ktsr
 
 		public Game Game { get; }
 
+		public byte[] Bytes =>
+			new List<byte>()
+				.Concat(Encoding.UTF8.GetBytes(Signature))
+				.Concat(ChunkType)
+				.Concat(new[] { Version })
+				.Concat(RepetitionUtils.GetBytesOfNulls(2))
+				.Concat(new[] { Platform })
+				.Concat(Game.Id)
+				.Concat(RepetitionUtils.GetBytesOfNulls(8))
+				.Concat(BitConverter.GetBytes(FileSize))
+				.Concat(RepetitionUtils.GetBytesOfNulls(32))
+				.Concat(Game.Entries)
+				.ToArray();
+
 		public KtsrHeader(string signature, byte[] chunkType, byte version, byte platform, uint fileSize, Game game)
 		{
 			Signature = signature;
@@ -42,6 +59,7 @@ namespace KvsTools.header.ktsr
 	{
 		public static readonly Game AttackOnTitan2 = new Game
 		(
+			"Attack on Titan 2",
 			new byte[] { 0x09, 0xd4, 0xf4, 0x15 },
 			new byte[]
 			{
@@ -54,6 +72,7 @@ namespace KvsTools.header.ktsr
 
 		public static readonly Game AtelierRyza1 = new Game
 		(
+			"Atelier Ryza 1",
 			new byte[] { 0x4e, 0xc5, 0xe8, 0xc5 },
 			new byte[]
 			{
@@ -69,11 +88,13 @@ namespace KvsTools.header.ktsr
 			AttackOnTitan2, AtelierRyza1
 		};
 
+		public string Name { get;  }
 		public byte[] Id { get; }
 		public byte[] Entries { get; }
 
-		private Game(byte[] id, byte[] entries)
+		private Game(string name, byte[] id, byte[] entries)
 		{
+			Name = name;
 			Id = id;
 			Entries = entries;
 		}
