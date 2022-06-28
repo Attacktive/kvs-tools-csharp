@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace KvsTools.extension
+namespace KvsTools.Extension
 {
 	public static class Extensions
 	{

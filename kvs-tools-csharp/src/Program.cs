@@ -1,8 +1,8 @@
 ﻿using System;
-using KvsTools.header.ktsr;
-using KvsTools.header.source;
-using KvsTools.util;
-
+using System.IO;
+using KvsTools.Header.Ktsr;
+using KvsTools.Header.Source;
+using KvsTools.Util;
 
 namespace KvsTools
 {
@@ -23,7 +23,9 @@ archive ./directory/to/source/files"
 					return 1;
 				case Command.Extract:
 					var ktsrHeader = KtsrHeaderReader.ReadHeader(pathToFile!);
-					var sourceFiles = SourceHeaderReader.ReadHeader(pathToFile!);
+					var (sourceFiles, sourceHeader) = SourceHeaderReader.ReadHeader(pathToFile!);
+					var directoryName = new FileInfo(pathToFile!).DirectoryName;
+					SourceWriter.WriteSources(ktsrHeader, sourceFiles, directoryName!, sourceHeader);
 					break;
 				case Command.Archive:
 				default:

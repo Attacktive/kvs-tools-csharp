@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using KvsTools.extension;
-using KvsTools.util;
+using KvsTools.Extension;
+using KvsTools.Util;
 
-namespace KvsTools.header.source
+namespace KvsTools.Header.Source
 {
 	public class SourceHeader
 	{

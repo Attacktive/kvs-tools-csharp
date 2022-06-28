@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
-		<Folder Include="src\archive" />
-		<Folder Include="src\extract" />
+		<Folder Include="src\Archive" />
+		<Folder Include="src\Extract" />
 	</ItemGroup>
 </Project>

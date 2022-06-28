@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using KvsTools.extension;
-using KvsTools.header.ktsr;
+using KvsTools.Extension;
+using KvsTools.Header.Ktsr;
 
-namespace KvsTools.header.source
+namespace KvsTools.Header.Source
 {
 	public static class SourceHeaderReader
 	{
-		public static IEnumerable<byte[]> ReadHeader(string pathToFile)
+		public static (IEnumerable<byte[]>, SourceHeader) ReadHeader(string pathToFile)
 		{
 			Console.WriteLine($"Trying to open {pathToFile}");
 
@@ -20,12 +20,13 @@ namespace KvsTools.header.source
 			using var binaryReader = new BinaryReader(fileStream);
 			var index = KtsrHeader.NumberOfBytes;
 			var headerBuffer = new byte[SourceHeader.NumberOfBytes];
+			SourceHeader sourceHeader;
 			do
 			{
 				binaryReader.BaseStream.Seek(index, SeekOrigin.Begin);
 				index += binaryReader.Read(headerBuffer, 0, SourceHeader.NumberOfBytes);
 
-				var sourceHeader = ParseSourceHeader(headerBuffer);
+				sourceHeader = ParseSourceHeader(headerBuffer);
 				// fixme: Why is it needed?
 				var actualFileSize = checked((int)sourceHeader.FileSize + 13);
 
@@ -44,7 +45,7 @@ namespace KvsTools.header.source
 				sourceFiles.Add(contentBuffer);
 			} while (index <= fileStream.Length);
 
-			return sourceFiles;
+			return (sourceFiles, sourceHeader);
 		}
 
 		private static SourceHeader ParseSourceHeader(byte[] bytes)

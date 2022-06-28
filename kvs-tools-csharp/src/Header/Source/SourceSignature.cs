@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace KvsTools.header.source
+namespace KvsTools.Header.Source
 {
 	public class SourceSignature
 	{
