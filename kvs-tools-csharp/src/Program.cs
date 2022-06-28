@@ -23,9 +23,9 @@ archive ./directory/to/source/files"
 					return 1;
 				case Command.Extract:
 					var ktsrHeader = KtsrHeaderReader.ReadHeader(pathToFile!);
-					var sourceFiles = SourceHeaderReader.ReadHeader(pathToFile!);
+					var (sourceFiles, sourceHeader) = SourceHeaderReader.ReadHeader(pathToFile!);
 					var directoryName = new FileInfo(pathToFile!).DirectoryName;
-					SourceWriter.WriteSources(ktsrHeader, sourceFiles, directoryName!);
+					SourceWriter.WriteSources(ktsrHeader, sourceFiles, directoryName!, sourceHeader);
 					break;
 				case Command.Archive:
 				default:
