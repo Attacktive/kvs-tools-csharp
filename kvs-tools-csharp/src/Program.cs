@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using KvsTools.header.ktsr;
 using KvsTools.header.source;
 using KvsTools.util;
@@ -23,7 +24,8 @@ archive ./directory/to/source/files"
 				case Command.Extract:
 					var ktsrHeader = KtsrHeaderReader.ReadHeader(pathToFile!);
 					var sourceFiles = SourceHeaderReader.ReadHeader(pathToFile!);
-					SourceWriter.WriteSources(ktsrHeader, sourceFiles);
+					var directoryName = new FileInfo(pathToFile!).DirectoryName;
+					SourceWriter.WriteSources(ktsrHeader, sourceFiles, directoryName!);
 					break;
 				case Command.Archive:
 				default:

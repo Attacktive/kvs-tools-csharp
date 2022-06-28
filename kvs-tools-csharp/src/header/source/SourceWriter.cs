@@ -8,7 +8,7 @@ namespace KvsTools.header.source
 {
 	public static class SourceWriter
 	{
-		public static void WriteSources(KtsrHeader ktsrHeader, IEnumerable<byte[]> sourceFiles)
+		public static void WriteSources(KtsrHeader ktsrHeader, IEnumerable<byte[]> sourceFiles, string directoryName)
 		{
 			var list = sourceFiles.ToList();
 			var size = list.Count;
@@ -18,7 +18,7 @@ namespace KvsTools.header.source
 				var currentBytes = list[i];
 
 				// TODO: the extension must be taken from the source header.
-				var outputFileName = $"{ktsrHeader.Game.Name}-{i.ToString().PadLeft(numberOfDigits, '0')}.kvs";
+				var outputFileName = $"{directoryName}{Path.DirectorySeparatorChar}{ktsrHeader.Game.Name}-{i.ToString().PadLeft(numberOfDigits, '0')}.kvs";
 				File.WriteAllBytes(outputFileName, currentBytes);
 			}
 		}
