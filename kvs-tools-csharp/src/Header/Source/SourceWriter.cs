@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using KvsTools.header.ktsr;
+using KvsTools.Header.Ktsr;
 
-namespace KvsTools.header.source
+namespace KvsTools.Header.Source
 {
 	public static class SourceWriter
 	{

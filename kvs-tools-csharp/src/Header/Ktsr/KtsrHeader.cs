@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using KvsTools.extension;
-using KvsTools.util;
+using KvsTools.Extension;
+using KvsTools.Util;
 
-namespace KvsTools.header.ktsr
+namespace KvsTools.Header.Ktsr
 {
 	public class KtsrHeader
 	{

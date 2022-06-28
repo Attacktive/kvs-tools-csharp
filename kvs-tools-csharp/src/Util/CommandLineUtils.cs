@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KvsTools.util
+namespace KvsTools.Util
 {
 	public static class CommandLineUtils
 	{

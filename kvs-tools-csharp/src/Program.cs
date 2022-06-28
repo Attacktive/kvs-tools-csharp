@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using KvsTools.header.ktsr;
-using KvsTools.header.source;
-using KvsTools.util;
+using KvsTools.Header.Ktsr;
+using KvsTools.Header.Source;
+using KvsTools.Util;
 
 namespace KvsTools
 {
