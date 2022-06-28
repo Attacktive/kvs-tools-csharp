@@ -32,7 +32,7 @@ namespace KvsTools.Header.Ktsr
 				throw new InconsistentFileSizeException(fileSize1, fileSize2);
 			}
 
-			var game = Game.ById(gameId);
+			var game = KtsrHeader.GameInfo.ById(gameId);
 			if (game == null)
 			{
 				throw new InvalidGameIdException(gameId);

@@ -46,7 +46,7 @@ namespace KvsTools.Header.Ktsr
 				KtsrHeaderValidator.Validate(signature, chunkTypeBytes, platformByte, gameIdBytes, fileSize1, fileSize2, gameEntriesBytes);
 			}
 
-			return new KtsrHeader(signature, chunkTypeBytes, versionByte, platformByte, fileSize1, Game.ById(gameIdBytes)!);
+			return new KtsrHeader(signature, chunkTypeBytes, versionByte, platformByte, fileSize1, KtsrHeader.GameInfo.ById(gameIdBytes)!);
 		}
 	}
 }
