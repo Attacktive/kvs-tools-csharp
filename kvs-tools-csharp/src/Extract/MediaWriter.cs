@@ -9,16 +9,19 @@ namespace KvsTools.Extract
 {
 	public static class MediaWriter
 	{
-		public static void WriteToFile(KtsrHeader ktsrHeader, IEnumerable<MediaFile> mediaFiles, string directoryName)
+		public static void WriteToFile(KtsrHeader ktsrHeader, IEnumerable<MediaFile> mediaFiles, string inputDirectoryName)
 		{
+			var directoryPath = Path.Combine(inputDirectoryName, ktsrHeader.Game.Name);
+			Directory.CreateDirectory(directoryPath);
+
 			var list = mediaFiles.ToList();
 			var size = list.Count;
 			var numberOfDigits = Math.Max(size.ToString().Length, 2);
 			for (var i = 0; i < size; i++)
 			{
 				var mediaFile = list[i];
+				var outputFileName = $"{Path.Combine(directoryPath, ktsrHeader.Game.Name)}-{i.ToString().PadLeft(numberOfDigits, '0')}.{mediaFile.Body.MediaType.Extension}";
 
-				var outputFileName = $"{directoryName}{Path.DirectorySeparatorChar}{ktsrHeader.Game.Name}-{i.ToString().PadLeft(numberOfDigits, '0')}.{mediaFile.Body.MediaType.Extension}";
 				File.WriteAllBytes(outputFileName, mediaFile.ToBytes());
 			}
 		}
