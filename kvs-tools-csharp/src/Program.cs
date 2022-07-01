@@ -23,8 +23,8 @@ archive ./directory/to/source/files"
 				case Command.Extract:
 					var ktsrHeader = KtsrHeaderReader.ReadHeader(pathToFile!);
 					var mediaFiles = MediaHeaderReader.Read(pathToFile!);
-					var directoryName = new FileInfo(pathToFile!).DirectoryName;
-					MediaWriter.WriteToFile(ktsrHeader, mediaFiles, directoryName!);
+					var inputDirectoryName = new FileInfo(pathToFile!).DirectoryName;
+					MediaWriter.WriteToFile(ktsrHeader, mediaFiles, inputDirectoryName!);
 					break;
 				case Command.Archive:
 				default:
