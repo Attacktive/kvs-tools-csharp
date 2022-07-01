@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using KvsTools.Extension;
+using KvsTools.Header;
 
-namespace KvsTools.Header.Ktsr
+namespace KvsTools.Spec.Ktsr
 {
 	public static class KtsrHeaderValidator
 	{
 		private static readonly byte[] ExpectedPlatforms = { 0x01, 0x03, 0x04 };
 
-		public static void Validate(string signature, byte[] chunkType, byte platform, byte[] gameId, uint fileSize1, uint fileSize2, byte[] gameEntries)
+		public static void Validate(string signature, byte[] chunkType, byte platform, byte[] gameId, uint fileSize1, uint fileSize2)
 		{
 			if (signature != KtsrHeader.DefaultSignature)
 			{
@@ -32,15 +33,10 @@ namespace KvsTools.Header.Ktsr
 				throw new InconsistentFileSizeException(fileSize1, fileSize2);
 			}
 
-			var game = KtsrHeader.GameInfo.ById(gameId);
+			var game = GameInfo.ById(gameId);
 			if (game == null)
 			{
 				throw new InvalidGameIdException(gameId);
-			}
-
-			if (!gameEntries.SequenceEqual(game.Entries))
-			{
-				throw new InvalidGameEntriesException();
 			}
 		}
 
@@ -72,11 +68,6 @@ namespace KvsTools.Header.Ktsr
 		private class InvalidGameIdException : DataException
 		{
 			internal InvalidGameIdException(IEnumerable<byte> gameId, Exception? cause = null) : base($"Unexpected game ID: {gameId.ToHexString()}", cause) { }
-		}
-
-		private class InvalidGameEntriesException : DataException
-		{
-			internal InvalidGameEntriesException(Exception? cause = null) : base("The game entries data does not agree with the id", cause) { }
 		}
 	}
 }
