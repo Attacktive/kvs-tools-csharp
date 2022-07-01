@@ -45,16 +45,13 @@ namespace KvsTools.Spec.Media.Header
 			.Concat(RepetitionUtils.GetBytesOfNulls(12))
 			.ToArray();
 
-		public static MediaHeader Parse(byte[] bytes, bool toValidate)
+		public static MediaHeader Parse(byte[] bytes)
 		{
 			var config = bytes.Take(4).ToArray();
 			var fileSizeBytes = bytes.Skip(4).Take(4).ToArray();
 			var chunk = bytes.Skip(8).Take(12).ToArray();
 
-			if (toValidate)
-			{
-				MediaHeaderValidator.Validate(config);
-			}
+			MediaHeaderValidator.Validate(config);
 
 			var fileSize = BitConverter.ToUInt32(fileSizeBytes);
 

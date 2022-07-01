@@ -74,7 +74,7 @@ namespace KvsTools.Spec.Ktsr
 			return $"Signature: {Signature}, ChunkType: {ChunkType.ToHexString()}, Version: {Version}, Platform: {Platform}, FileSize: {FileSize}, GameId: {Game.Id.ToHexString()}, GameEntries: {Game.Entries.ToHexString()}";
 		}
 
-		public static KtsrHeader Parse(IReadOnlyList<byte> bytes, bool toValidate)
+		public static KtsrHeader Parse(IReadOnlyList<byte> bytes)
 		{
 			var signatureBytes = bytes.Take(4).ToArray();
 			var chunkTypeBytes = bytes.Skip(4).Take(4).ToArray();
@@ -88,10 +88,7 @@ namespace KvsTools.Spec.Ktsr
 			var fileSize1 = BitConverter.ToUInt32(fileSize1Bytes);
 			var fileSize2 = BitConverter.ToUInt32(fileSize2Bytes);
 
-			if (toValidate)
-			{
-				KtsrHeaderValidator.Validate(signature, chunkTypeBytes, platformByte, gameIdBytes, fileSize1, fileSize2);
-			}
+			KtsrHeaderValidator.Validate(signature, chunkTypeBytes, platformByte, gameIdBytes, fileSize1, fileSize2);
 
 			return new KtsrHeader(versionByte, platformByte, fileSize1, GameInfo.ById(gameIdBytes)!);
 		}

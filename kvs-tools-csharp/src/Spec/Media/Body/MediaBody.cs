@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using KvsTools.Util;
 
 namespace KvsTools.Spec.Media.Body
 {
@@ -36,16 +35,13 @@ namespace KvsTools.Spec.Media.Body
 			.Concat(Content)
 			.ToArray();
 
-		public static MediaBody Parse(byte[] bytes, bool toValidate)
+		public static MediaBody Parse(byte[] bytes)
 		{
 			var mediaTypeBytes = bytes.Take(4).ToArray();
 			var sizeBytes = bytes.Skip(4).Take(4).ToArray();
 			var content = bytes.Skip(8).ToArray();
 
-			if (toValidate)
-			{
-				MediaBodyValidator.Validate(mediaTypeBytes);
-			}
+			MediaBodyValidator.Validate(mediaTypeBytes);
 
 			var mediaType = MediaType.ByBytes(mediaTypeBytes)!;
 			var size = BitConverter.ToUInt32(sizeBytes);

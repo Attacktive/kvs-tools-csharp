@@ -10,7 +10,7 @@ namespace KvsTools.Extract
 {
 	public static class MediaHeaderReader
 	{
-		public static IEnumerable<MediaFile> Read(string pathToFile, bool toValidate = true)
+		public static IEnumerable<MediaFile> Read(string pathToFile)
 		{
 			Console.WriteLine($"Trying to open {pathToFile}");
 
@@ -31,14 +31,14 @@ namespace KvsTools.Extract
 
 				index += bytesRead;
 
-				var mediaHeader = MediaHeader.Parse(headerBuffer, toValidate);
+				var mediaHeader = MediaHeader.Parse(headerBuffer);
 				var bodySize = checked((int)mediaHeader.FileSize - MediaHeader.NumberOfBytes);
 
 				var contentBuffer = new byte[bodySize];
 				bytesRead = binaryReader.Read(contentBuffer, 0, bodySize);
 				index += bytesRead;
 
-				var mediaBody = MediaBody.Parse(contentBuffer, toValidate);
+				var mediaBody = MediaBody.Parse(contentBuffer);
 
 				var mediaFile = new MediaFile(mediaHeader, mediaBody);
 				mediaFiles.Add(mediaFile);

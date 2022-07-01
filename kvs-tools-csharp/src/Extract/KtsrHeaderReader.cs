@@ -6,7 +6,7 @@ namespace KvsTools.Extract
 {
 	public static class KtsrHeaderReader
 	{
-		public static KtsrHeader ReadHeader(string pathToFile, bool toValidate = true)
+		public static KtsrHeader ReadHeader(string pathToFile)
 		{
 			Console.WriteLine($"Trying to open {pathToFile}");
 
@@ -18,7 +18,7 @@ namespace KvsTools.Extract
 				throw new KtsrHeaderValidator.InvalidKtsrHeaderException(KtsrHeader.NumberOfBytes, bytesRead);
 			}
 
-			var ktsrHeader = KtsrHeader.Parse(buffer, toValidate);
+			var ktsrHeader = KtsrHeader.Parse(buffer);
 			Console.WriteLine($"ktsrHeader: {ktsrHeader}");
 
 			return ktsrHeader;
