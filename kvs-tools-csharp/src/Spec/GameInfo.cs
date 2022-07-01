@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using KvsTools.Extract;
-using KvsTools.Spec.Media;
 using KvsTools.Spec.Media.Header;
 
-namespace KvsTools.Header
+namespace KvsTools.Spec
 {
 	public class GameInfo
 	{

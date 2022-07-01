@@ -5,7 +5,7 @@ using KvsTools.Util;
 
 namespace KvsTools.Spec.Media.Header
 {
-	public class MediaHeader
+	public sealed class MediaHeader
 	{
 		public static readonly int NumberOfBytes = 32;
 
@@ -45,7 +45,7 @@ namespace KvsTools.Spec.Media.Header
 			.Concat(RepetitionUtils.GetBytesOfNulls(12))
 			.ToArray();
 
-		public static MediaHeader Parse(byte[] bytes, bool toValidate = true)
+		public static MediaHeader Parse(byte[] bytes, bool toValidate)
 		{
 			var config = bytes.Take(4).ToArray();
 			var fileSizeBytes = bytes.Skip(4).Take(4).ToArray();

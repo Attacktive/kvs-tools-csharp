@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using KvsTools.Extension;
-using KvsTools.Header;
 using KvsTools.Util;
 
 namespace KvsTools.Spec.Ktsr
@@ -62,7 +61,7 @@ namespace KvsTools.Spec.Ktsr
 				.Concat(RepetitionUtils.GetBytesOfNulls(32))
 				.ToArray();
 
-		public KtsrHeader(byte version, byte platform, uint fileSize, GameInfo gameInfo)
+		private KtsrHeader(byte version, byte platform, uint fileSize, GameInfo gameInfo)
 		{
 			Version = version;
 			Platform = platform;
@@ -75,7 +74,7 @@ namespace KvsTools.Spec.Ktsr
 			return $"Signature: {Signature}, ChunkType: {ChunkType.ToHexString()}, Version: {Version}, Platform: {Platform}, FileSize: {FileSize}, GameId: {Game.Id.ToHexString()}, GameEntries: {Game.Entries.ToHexString()}";
 		}
 
-		public static KtsrHeader Parse(IReadOnlyList<byte> bytes, bool toValidate = true)
+		public static KtsrHeader Parse(IReadOnlyList<byte> bytes, bool toValidate)
 		{
 			var signatureBytes = bytes.Take(4).ToArray();
 			var chunkTypeBytes = bytes.Skip(4).Take(4).ToArray();

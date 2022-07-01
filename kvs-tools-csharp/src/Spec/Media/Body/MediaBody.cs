@@ -36,7 +36,7 @@ namespace KvsTools.Spec.Media.Body
 			.Concat(Content)
 			.ToArray();
 
-		public static MediaBody Parse(byte[] bytes, bool toValidate = true)
+		public static MediaBody Parse(byte[] bytes, bool toValidate)
 		{
 			var mediaTypeBytes = bytes.Take(4).ToArray();
 			var sizeBytes = bytes.Skip(4).Take(4).ToArray();

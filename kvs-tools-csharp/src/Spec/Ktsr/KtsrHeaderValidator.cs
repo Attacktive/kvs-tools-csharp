@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using KvsTools.Extension;
-using KvsTools.Header;
 
 namespace KvsTools.Spec.Ktsr
 {
