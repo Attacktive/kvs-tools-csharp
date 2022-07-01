@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using KvsTools.Spec.Media.Header;
 
 namespace KvsTools.Spec
 {
@@ -8,31 +7,27 @@ namespace KvsTools.Spec
 	{
 		public static readonly GameInfo AttackOnTitan2 = new GameInfo(
 			"Attack on Titan 2",
-			new byte[] { 0x36, 0x0e, 0xf4, 0x05 }, MediaHeader.DefaultConfig.Concat(
-				new byte[]
-				{
-					0x20, 0xe9, 0x88, 0x00,
-					0xca, 0xab, 0xa8, 0xa9,
-					0x20, 0x00, 0x00, 0x00
-				}
-			).ToArray()
+			new byte[] { 0x36, 0x0e, 0xf4, 0x05 }
 		);
 
 		public static readonly GameInfo AtelierRyza1 = new GameInfo(
 			"Atelier Ryza 1",
-			new byte[] { 0x4e, 0xc5, 0xe8, 0xc5 }, MediaHeader.DefaultConfig.Concat(
-				new byte[]
-				{
-					0xf0, 0x2c, 0x1b, 0x00,
-					0x00, 0x70, 0x4c, 0x41,
-					0x20, 0x00, 0x00, 0x00
-				}
-			).ToArray()
+			new byte[] { 0x4e, 0xc5, 0xe8, 0xc5 }
+		);
+
+		public static readonly GameInfo AtelierRyza2 = new GameInfo(
+			"Atelier Ryza 2",
+			new byte[] { 0xa9, 0x05, 0x49, 0xaf }
+		);
+
+		public static readonly GameInfo BlueReflectionSecondLight = new GameInfo(
+			"BLUE REFLECTION： Second Light",
+			new byte[] { 0x11, 0x9d, 0xb0, 0x05 }
 		);
 
 		private static readonly List<GameInfo> List = new List<GameInfo>
 		{
-			AttackOnTitan2, AtelierRyza1
+			AttackOnTitan2, AtelierRyza1, AtelierRyza2, BlueReflectionSecondLight
 		};
 
 		public string Name { get; }
@@ -40,13 +35,11 @@ namespace KvsTools.Spec
 		/// 4 bytes
 		/// </summary>
 		public byte[] Id { get; }
-		public byte[] Entries { get; }
 
-		private GameInfo(string name, byte[] id, byte[] entries)
+		private GameInfo(string name, byte[] id)
 		{
 			Name = name;
 			Id = id;
-			Entries = entries;
 		}
 
 		public static GameInfo? ById(byte[] id)
