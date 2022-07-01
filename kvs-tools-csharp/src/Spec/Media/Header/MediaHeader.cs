@@ -5,7 +5,7 @@ using KvsTools.Util;
 
 namespace KvsTools.Spec.Media.Header
 {
-	public sealed class MediaHeader
+	public class MediaHeader
 	{
 		public static readonly int NumberOfBytes = 32;
 
