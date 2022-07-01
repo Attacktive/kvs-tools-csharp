@@ -71,7 +71,7 @@ namespace KvsTools.Spec.Ktsr
 
 		public override string ToString()
 		{
-			return $"Signature: {Signature}, ChunkType: {ChunkType.ToHexString()}, Version: {Version}, Platform: {Platform}, FileSize: {FileSize}, GameId: {Game.Id.ToHexString()}, GameEntries: {Game.Entries.ToHexString()}";
+			return $"Signature: {Signature}, ChunkType: {ChunkType.ToHexString()}, Version: {Version}, Platform: {Platform}, FileSize: {FileSize}, GameId: {Game.Id.ToHexString()}";
 		}
 
 		public static KtsrHeader Parse(IReadOnlyList<byte> bytes)
