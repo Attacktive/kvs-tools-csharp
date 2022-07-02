@@ -5,7 +5,4 @@
 		<RootNamespace>KvsTools</RootNamespace>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
-	<ItemGroup>
-		<Folder Include="src\Archive" />
-	</ItemGroup>
 </Project>

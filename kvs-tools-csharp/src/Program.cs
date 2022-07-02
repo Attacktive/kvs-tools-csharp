@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using KvsTools.Archive;
 using KvsTools.Extract;
 using KvsTools.Util;
 
@@ -27,6 +28,8 @@ archive ./directory/to/source/files"
 					MediaWriter.WriteToFile(ktsrHeader, mediaFiles, inputDirectoryName!);
 					break;
 				case Command.Archive:
+					MediaFileReader.ReadMediaFiles(pathToFile!);
+					break;
 				default:
 					// TODO
 					break;

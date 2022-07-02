@@ -12,20 +12,16 @@ namespace KvsTools.Util
 			}
 
 			var commandArgument = arguments[0];
-			var pathArgument = arguments[1];
+			var pathToFile = arguments[1];
 
 			Command command;
-			string? pathToFile;
 			switch (commandArgument.ToLowerInvariant())
 			{
 				case "extract":
 					command = Command.Extract;
-					pathToFile = pathArgument;
 					break;
 				case "archive":
 					command = Command.Archive;
-					// TODO
-					pathToFile = "TODO";
 					break;
 				default:
 					command = Command.None;
@@ -40,7 +36,7 @@ namespace KvsTools.Util
 
 			if (pathToFile == null)
 			{
-				throw new ArgumentException($"The 2nd argument ({pathArgument}) is invalid.");
+				throw new ArgumentException($"The 2nd argument ({pathToFile}) is invalid.");
 			}
 
 			return (command, pathToFile);

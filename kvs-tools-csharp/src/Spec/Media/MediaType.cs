@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -28,6 +29,11 @@ namespace KvsTools.Spec.Media
 		public static MediaType? ByBytes(byte[] mediaTypeBytes)
 		{
 			return List.FirstOrDefault(mediaType => mediaType.ToByteArray().SequenceEqual(mediaTypeBytes));
+		}
+
+		public static bool IsMediaFile(string fileName)
+		{
+			return List.Any(mediaType => fileName.EndsWith(mediaType.Extension, StringComparison.OrdinalIgnoreCase));
 		}
 	}
 }
