@@ -15,7 +15,7 @@ namespace KvsTools.Archive
 
 			var files = Directory.EnumerateFiles(path).Where(MediaType.IsMediaFile);
 			var mediaSize = checked((uint)files.Select(file => new FileInfo(file)).Sum(file => file.Length));
-			var totalSize = (uint)checked(KtsrHeader.NumberOfBytes + mediaSize);
+			var totalSize = checked((uint)(KtsrHeader.NumberOfBytes + mediaSize));
 
 			var ktsrHeader = new KtsrHeader(totalSize, gameInfo);
 			Console.WriteLine($"KTSR header generated: {ktsrHeader}");
