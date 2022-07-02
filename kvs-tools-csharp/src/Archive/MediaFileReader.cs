@@ -14,13 +14,13 @@ namespace KvsTools.Archive
 			Console.WriteLine($"Trying to open files from {path}");
 
 			var files = Directory.EnumerateFiles(path).Where(MediaType.IsMediaFile);
-			var mediaSize = checked((int)files.Select(file => new FileInfo(file)).Sum(file => file.Length));
+			var mediaSize = checked((uint)files.Select(file => new FileInfo(file)).Sum(file => file.Length));
 			var totalSize = (uint)checked(KtsrHeader.NumberOfBytes + mediaSize);
 
 			var ktsrHeader = new KtsrHeader(totalSize, gameInfo);
 			Console.WriteLine($"KTSR header generated: {ktsrHeader}");
 
-			using var memoryStream = new MemoryStream(mediaSize);
+			using var memoryStream = new MemoryStream();
 			using var binaryWriter = new BinaryWriter(memoryStream);
 
 			binaryWriter.Write(ktsrHeader.Bytes);
