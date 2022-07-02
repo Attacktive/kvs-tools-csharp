@@ -14,8 +14,7 @@ namespace KvsTools.Archive
 			Console.WriteLine($"Trying to open files from {path}");
 
 			var files = Directory.EnumerateFiles(path).Where(MediaType.IsMediaFile);
-			//var mediaSize = checked((uint)files.Select(file => new FileInfo(file)).Sum(file => file.Length));
-			var mediaSize = uint.MaxValue;
+			var mediaSize = checked((uint)files.Select(file => new FileInfo(file)).Sum(file => file.Length));
 			var totalSize = (uint)checked(KtsrHeader.NumberOfBytes + mediaSize);
 
 			var ktsrHeader = new KtsrHeader(totalSize, gameInfo);
