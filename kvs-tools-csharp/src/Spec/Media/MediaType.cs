@@ -25,9 +25,9 @@ namespace KvsTools.Spec.Media
 
 		public IEnumerable<byte> ToByteArray() => Encoding.UTF8.GetBytes(Value);
 
-		public static MediaType? ByBytes(byte[] signatureBytes)
+		public static MediaType? ByBytes(byte[] mediaTypeBytes)
 		{
-			return List.FirstOrDefault(signature => signature.ToByteArray().SequenceEqual(signatureBytes));
+			return List.FirstOrDefault(mediaType => mediaType.ToByteArray().SequenceEqual(mediaTypeBytes));
 		}
 	}
 }
