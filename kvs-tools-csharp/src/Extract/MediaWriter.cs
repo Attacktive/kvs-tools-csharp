@@ -11,7 +11,7 @@ namespace KvsTools.Extract
 	{
 		public static void WriteToFile(KtsrHeader ktsrHeader, IEnumerable<MediaFile> mediaFiles, string inputDirectoryName)
 		{
-			var directoryPath = Path.Combine(inputDirectoryName, ktsrHeader.Game.Name);
+			var directoryPath = Path.Combine(inputDirectoryName, ktsrHeader.Game.FileSystemCompatibleName);
 			Directory.CreateDirectory(directoryPath);
 
 			var list = mediaFiles.ToList();
@@ -20,7 +20,7 @@ namespace KvsTools.Extract
 			for (var i = 0; i < size; i++)
 			{
 				var mediaFile = list[i];
-				var outputFileName = $"{Path.Combine(directoryPath, ktsrHeader.Game.Name)}-{i.ToString().PadLeft(numberOfDigits, '0')}.{mediaFile.Body.MediaType.Extension}";
+				var outputFileName = $"{Path.Combine(directoryPath, ktsrHeader.Game.FileSystemCompatibleName)}-{i.ToString().PadLeft(numberOfDigits, '0')}.{mediaFile.Body.MediaType.Extension}";
 
 				File.WriteAllBytes(outputFileName, mediaFile.ToBytes());
 			}
