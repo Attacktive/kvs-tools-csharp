@@ -1,18 +1,20 @@
 ﻿using System;
+using KvsTools.Spec;
 
 namespace KvsTools.Util
 {
 	public static class CommandLineUtils
 	{
-		public static (Command, string?) Parse(params string[] arguments)
+		public static (Command, string?, GameInfo?) Parse(params string[] arguments)
 		{
-			if (arguments.Length != 2)
+			if (arguments.Length < 2)
 			{
-				throw new ArgumentException();
+				return (Command.None, null, null);
 			}
 
 			var commandArgument = arguments[0];
 			var pathToFile = arguments[1];
+			GameInfo? gameInfo = null;
 
 			Command command;
 			switch (commandArgument.ToLowerInvariant())
@@ -21,7 +23,17 @@ namespace KvsTools.Util
 					command = Command.Extract;
 					break;
 				case "archive":
-					command = Command.Archive;
+					if (arguments.Length > 2)
+					{
+						command = Command.Archive;
+						var gameInfoArgument = arguments[2];
+						gameInfo = int.TryParse(gameInfoArgument, out var index)? GameInfo.ByIndex(index): GameInfo.ByName(gameInfoArgument);
+					}
+					else
+					{
+						return (Command.None, null, null);
+					}
+
 					break;
 				default:
 					command = Command.None;
@@ -39,7 +51,7 @@ namespace KvsTools.Util
 				throw new ArgumentException($"The 2nd argument ({pathToFile}) is invalid.");
 			}
 
-			return (command, pathToFile);
+			return (command, pathToFile, gameInfo);
 		}
 	}
 

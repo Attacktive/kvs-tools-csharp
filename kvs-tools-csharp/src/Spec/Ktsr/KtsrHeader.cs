@@ -58,10 +58,13 @@ namespace KvsTools.Spec.Ktsr
 				.Concat(Game.Id)
 				.Concat(RepetitionUtils.GetBytesOfNulls(8))
 				.Concat(BitConverter.GetBytes(FileSize))
+				.Concat(BitConverter.GetBytes(FileSize))
 				.Concat(RepetitionUtils.GetBytesOfNulls(32))
 				.ToArray();
 
-		private KtsrHeader(byte version, byte platform, uint fileSize, GameInfo gameInfo)
+		public KtsrHeader(uint fileSize, GameInfo gameInfo) : this(1, 1, fileSize, gameInfo) { }
+
+		public KtsrHeader(byte version, byte platform, uint fileSize, GameInfo gameInfo)
 		{
 			Version = version;
 			Platform = platform;
