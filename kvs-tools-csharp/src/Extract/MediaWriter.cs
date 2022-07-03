@@ -17,12 +17,14 @@ namespace KvsTools.Extract
 			var list = mediaFiles.ToList();
 			var size = list.Count;
 			var numberOfDigits = Math.Max(size.ToString().Length, 2);
+			var fileNamePrefix = Path.Combine(directoryPath, ktsrHeader.Game.FileSystemCompatibleName);
 			for (var i = 0; i < size; i++)
 			{
 				var mediaFile = list[i];
-				var outputFileName = $"{Path.Combine(directoryPath, ktsrHeader.Game.FileSystemCompatibleName)}-{i.ToString().PadLeft(numberOfDigits, '0')}.{mediaFile.Body.MediaType.Extension}";
+				var outputFileName = $"{fileNamePrefix}-{i.ToString().PadLeft(numberOfDigits, '0')}.{mediaFile.Body.MediaType.Extension}";
 
 				File.WriteAllBytes(outputFileName, mediaFile.ToBytes());
+				Console.WriteLine($"{outputFileName}: {mediaFile.Header}");
 			}
 		}
 	}

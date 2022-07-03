@@ -42,8 +42,6 @@ namespace KvsTools.Extract
 
 				var mediaFile = new MediaFile(mediaHeader, mediaBody);
 				mediaFiles.Add(mediaFile);
-
-				Console.WriteLine($"Media File #{mediaFiles.Count + 1}: {mediaHeader}");
 			} while (index <= fileStream.Length);
 
 			return mediaFiles;

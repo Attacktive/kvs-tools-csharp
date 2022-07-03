@@ -3,7 +3,6 @@ using System.IO;
 using KvsTools.Archive;
 using KvsTools.Extract;
 using KvsTools.Spec;
-using KvsTools.Spec.Ktsr;
 using KvsTools.Util;
 
 namespace KvsTools
@@ -16,7 +15,17 @@ namespace KvsTools
 
 			switch (command)
 			{
-				case Command.None:
+				case Command.Extract:
+					var inputDirectoryName = new FileInfo(pathToFile!).DirectoryName!;
+					var ktsrHeader = KtsrHeaderReader.ReadHeader(pathToFile!);
+					var mediaFiles = MediaHeaderReader.Read(pathToFile!);
+					MediaWriter.WriteToFile(ktsrHeader, mediaFiles, inputDirectoryName);
+					break;
+				case Command.Archive:
+					var (generatedKtsrHeader, data) = MediaFileReader.ReadMediaFiles(pathToFile!, gameInfo!);
+					ArchiveWriter.WriteToFile(generatedKtsrHeader, data, pathToFile!);
+					break;
+				default:
 					Console.WriteLine(
 						@$"Usage:
 extract ./bgm.ktsl2stbin
@@ -26,19 +35,6 @@ List of supported games:
 					);
 
 					return 1;
-				case Command.Extract:
-					var inputDirectoryName = new FileInfo(pathToFile!).DirectoryName!;
-					var ktsrHeader = KtsrHeaderReader.ReadHeader(pathToFile!);
-					var mediaFiles = MediaHeaderReader.Read(pathToFile!);
-					MediaWriter.WriteToFile(ktsrHeader, mediaFiles, inputDirectoryName!);
-					break;
-				case Command.Archive:
-					var (generatedKtsrHeader, data) = MediaFileReader.ReadMediaFiles(pathToFile!, gameInfo!);
-					ArchiveWriter.WriteToFile(generatedKtsrHeader, data, pathToFile!);
-					break;
-				default:
-					// TODO
-					break;
 			}
 
 			return 0;
