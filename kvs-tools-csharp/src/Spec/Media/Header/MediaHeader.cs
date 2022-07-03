@@ -15,7 +15,7 @@ namespace KvsTools.Spec.Media.Header
 		/// 4 bytes
 		/// <para>Should be <see cref="DefaultConfig"/></para>
 		/// </summary>
-		public byte[] Config { get; } = DefaultConfig;
+		public byte[] Config => DefaultConfig;
 
 		/// <summary>
 		/// 4 bytes

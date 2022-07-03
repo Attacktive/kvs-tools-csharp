@@ -17,13 +17,13 @@ namespace KvsTools.Spec.Ktsr
 		/// 4 bytes
 		/// <para>Should be <see cref="DefaultSignature"/>, nothing else</para>
 		/// </summary>
-		public string Signature { get; } = DefaultSignature;
+		public string Signature => DefaultSignature;
 
 		/// <summary>
 		/// 4 bytes
 		/// <para>Should be <see cref="DefaultChunkType"/>, nothing else</para>
 		/// </summary>
-		public byte[] ChunkType { get; } = DefaultChunkType;
+		public byte[] ChunkType => DefaultChunkType;
 
 		/// <summary>
 		/// 1 byte

@@ -7,8 +7,8 @@ namespace KvsTools.Spec.Media
 {
 	public class MediaType
 	{
-		public static readonly MediaType Kovs = new MediaType("KOVS", "kvs");
-		public static readonly MediaType Ktss = new MediaType("KTSS", "kns");
+		private static readonly MediaType Kovs = new MediaType("KOVS", "kvs");
+		private static readonly MediaType Ktss = new MediaType("KTSS", "kns");
 
 		private static readonly List<MediaType> List = new List<MediaType>
 		{

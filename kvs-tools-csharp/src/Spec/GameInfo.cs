@@ -7,25 +7,25 @@ namespace KvsTools.Spec
 {
 	public class GameInfo
 	{
-		public static readonly GameInfo AttackOnTitan2 = new GameInfo(
+		private static readonly GameInfo AttackOnTitan2 = new GameInfo(
 			"Attack on Titan 2",
 			"Attack on Titan 2",
 			new byte[] { 0x36, 0x0e, 0xf4, 0x05 }
 		);
 
-		public static readonly GameInfo AtelierRyza1 = new GameInfo(
+		private static readonly GameInfo AtelierRyza1 = new GameInfo(
 			"Atelier Ryza 1",
 			"Atelier Ryza 1",
 			new byte[] { 0x4e, 0xc5, 0xe8, 0xc5 }
 		);
 
-		public static readonly GameInfo AtelierRyza2 = new GameInfo(
+		private static readonly GameInfo AtelierRyza2 = new GameInfo(
 			"Atelier Ryza 2",
 			"Atelier Ryza 2",
 			new byte[] { 0xa9, 0x05, 0x49, 0xaf }
 		);
 
-		public static readonly GameInfo BlueReflectionSecondLight = new GameInfo(
+		private static readonly GameInfo BlueReflectionSecondLight = new GameInfo(
 			"BLUE REFLECTION: Second Light",
 			"BLUE REFLECTION： Second Light",
 			new byte[] { 0x11, 0x9d, 0xb0, 0x05 }
