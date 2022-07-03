@@ -25,7 +25,6 @@ namespace KvsTools
 					var (generatedKtsrHeader, data) = MediaFileReader.ReadMediaFiles(pathToFile!, gameInfo!);
 					ArchiveWriter.WriteToFile(generatedKtsrHeader, data, pathToFile!);
 					break;
-				case Command.None:
 				default:
 					Console.WriteLine(
 						@$"Usage:
