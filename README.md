@@ -7,4 +7,10 @@ This is a C# porting of [kvs-tools](https://github.com/Hairo/kvs-tools).
 ---
 
 It's incomplete but I have no plan to carry on anytime soon.
-What has to be done: parse untouched .ktsl2asbin and update the position of each track.
+
+What has to be done:
+- parse untouched .ktsl2asbin,
+- update the position of each track
+- update any other information required
+
+.ktsl2asbin file format is [partially covered](https://github.com/Attacktive/kvs-tools-csharp/wiki/The-Headers#2).
