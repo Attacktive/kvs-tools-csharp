@@ -23,25 +23,33 @@ namespace KvsTools.Spec.Media.Header
 		public uint FileSize { get; }
 
 		/// <summary>
-		/// 12 bytes
+		/// 8 bytes
 		/// </summary>
 		/// <returns></returns>
-		public byte[] Chunk { get; }
+		public byte[] Unknown { get; }
 
-		private MediaHeader(uint fileSize, byte[] chunk)
+		/// <summary>
+		/// 4 bytes
+		/// <para>Starts with <see cref="MediaType"/> and does not include the tail paddings</para>
+		/// </summary>
+		public uint MediaSize { get; }
+
+		private MediaHeader(uint fileSize, byte[] unknown, uint mediaSize)
 		{
 			FileSize = fileSize;
-			Chunk = chunk;
+			Unknown = unknown;
+			MediaSize = mediaSize;
 		}
 
 		public override string ToString()
 		{
-			return $"FileSize: {FileSize}, Chunk: {Chunk.ToHexString()}";
+			return $"FileSize: {FileSize}, Unknown: {Unknown.ToHexString()}, MediaSize: {MediaSize}";
 		}
 
 		public byte[] ToBytes() => Config
 			.Concat(BitConverter.GetBytes(FileSize))
-			.Concat(Chunk)
+			.Concat(Unknown)
+			.Concat(BitConverter.GetBytes(MediaSize))
 			.Concat(RepetitionUtils.GetBytesOfNulls(12))
 			.ToArray();
 
@@ -49,13 +57,15 @@ namespace KvsTools.Spec.Media.Header
 		{
 			var config = bytes.Take(4).ToArray();
 			var fileSizeBytes = bytes.Skip(4).Take(4).ToArray();
-			var chunk = bytes.Skip(8).Take(12).ToArray();
+			var unknown = bytes.Skip(8).Take(8).ToArray();
+			var mediaSizeBytes = bytes.Skip(16).Take(4).ToArray();
 
 			MediaHeaderValidator.Validate(config);
 
 			var fileSize = BitConverter.ToUInt32(fileSizeBytes);
+			var mediaSize = BitConverter.ToUInt32(mediaSizeBytes);
 
-			return new MediaHeader(fileSize, chunk);
+			return new MediaHeader(fileSize, unknown, mediaSize);
 		}
 	}
 }
